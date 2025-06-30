@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CAMPO A CIDADE</title>
+    <title>Campo a Cidade</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <style>
         body {
             margin: 0;
@@ -13,13 +16,16 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background:  linear-gradient(to right, #6a11cb, #2575fc);
-}
+            /* Background from the second snippet, you can choose based on preference */
+            background: url('https://www.cnabrasil.org.br/storage/arquivos/imagens/AgrinhoAbre.jpg') no-repeat center center;
             background-size: cover;
-            background-color: white;
-            font-family: 'Pacifico', cursive;
+            color: white; /* Text color for the entire body */
+            font-family: 'Pacifico', cursive; /* Applied to the whole body */
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-            position: relative;
+            position: relative; /* Needed for the ::before pseudo-element */
+        }
+
+        /* Overlay for better text readability */
         body::before {
             content: '';
             position: absolute;
@@ -27,129 +33,125 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: -1;
+            background: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+            z-index: -1; /* Ensures the overlay is behind the content */
         }
+
         h1 {
             margin-top: 30px;
-  margin-bottom: 20px;
-  padding: 10px;
-}
+            margin-bottom: 20px;
+            padding: 10px;
+            text-align: center; /* Center the title */
+            font-size: 3em; /* Larger font size for the title */
+            color: #fff; /* White color for the title */
+        }
+
         .video-container {
             max-width: 800px;
-            width: 100%;
+            width: 90%; /* Make it a bit more responsive */
             text-align: center;
             z-index: 1;
+            background-color: rgba(255, 255, 255, 0.1); /* Slightly transparent background for the container */
+            padding: 20px;
+            border-radius: 10px; /* Rounded corners for the container */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4); /* More prominent shadow */
         }
+
         iframe {
-            border: 3px solid #fff;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-}
+            width: 100%;
+            height: 450px; /* Consistent height for the video */
+            border: 3px solid #fff; /* White border around the video */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for the video iframe */
+            border-radius: 8px; /* Rounded corners for the iframe */
+        }
+
         button {
-            background-color: #ff5722;
-  box-shadow: 2px 2px 8px rgba(0,0,0,0.3);
-}
+            margin-top: 20px; /* More space above the button */
+            padding: 12px 25px; /* Larger padding for a bigger button */
+            font-size: 18px; /* Larger font size for the button text */
+            cursor: pointer;
+            background-color: #ff5722; /* Orange color from your first snippet */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3); /* Shadow for the button */
+            transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transition for hover effects */
+        }
+
         button:hover {
-            background-color: #45a049;
+            background-color: #e64a19; /* Darker orange on hover */
+            transform: translateY(-2px); /* Slight lift effect on hover */
+        }
+
+        /* Basic responsive adjustments */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5em;
+            }
+            iframe {
+                height: 300px; /* Adjust height for smaller screens */
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2em;
+            }
+            iframe {
+                height: 220px;
+            }
+            button {
+                font-size: 16px;
+                padding: 10px 20px;
+            }
         }
     </style>
 </head>
 <body>
-   
-    </h1> CAMPO A CIDADE</h1>
-   
+
+    <h1>CAMPO A CIDADE</h1>
+
     <div class="video-container">
-        <iframe id="video" src="https://www.youtube.com/embed/jm1M7TgQQ5Y" title="Vídeo sobre Campo e Cidade" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        <br>
+        <iframe id="video" src="https://www.youtube.com/embed/YOUR_YOUTUBE_VIDEO_ID" title="Vídeo sobre Campo e Cidade" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         <button onclick="toggleVideo()">PAUSE/DESPAUSE</button>
     </div>
 
     <script>
+        // Note: Directly controlling YouTube embeds via JavaScript like this is generally not recommended
+        // without the YouTube IFrame Player API. The current script will not work as expected with a YouTube embed.
+        // For a proper solution, you'd need to load the YouTube IFrame Player API.
+        // This function as written will only work if the iframe content is a simple HTML5 video that is directly manipulable.
+        // For YouTube videos, you'd need something like:
+        /*
+        let player;
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('video', {
+                events: {
+                    'onReady': onPlayerReady
+                }
+            });
+        }
+        function onPlayerReady(event) {
+            // Player is ready, now you can control it
+        }
+        function toggleVideo() {
+            if (player.getPlayerState() === 1 || player.getPlayerState() === 3) { // 1 = Playing, 3 = Buffering
+                player.pauseVideo();
+            } else {
+                player.playVideo();
+            }
+        }
+        // You would also need to load the YouTube IFrame Player API script:
+        // <script src="https://www.youtube.com/iframe_api"></script>
+        */
         function toggleVideo() {
             const video = document.getElementById('video');
-            const iframe = video.contentWindow;
-            const player = iframe.document.querySelector('video');
-            if (player.paused) {
-                player.PAUSE();
-            } else {
-                player.DESPAUSE();
-            }
+            // This part of the script is highly unlikely to work for an embedded YouTube video directly.
+            // It assumes the iframe's contentWindow grants direct access to a 'video' element and its methods.
+            // For a true pause/play of a YouTube video, you need the YouTube IFrame Player API.
+            alert("The pause/despause functionality for YouTube videos requires the YouTube IFrame Player API for proper control. This button might not work as expected with a standard YouTube embed.");
+            // You can add a placeholder action if needed, or remove the button if you're not implementing the API.
         }
     </script>
 </body>
-</html><!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CAMPO A CIDADE</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background: url('https://www.cnabrasil.org.br/storage/arquivos/imagens/AgrinhoAbre.jpg') no-repeat center center;
-            background-size: cover;
-            color: white;
-            font-family: Arial, sans-serif;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-            position: relative;
-        }
-        body::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: -1;
-        }
-        h1 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .video-container {
-            max-width: 800px;
-            width: 100%;
-            text-align: center;
-            z-index: 1;
-        }
-        iframe {
-            width: 100%;
-            height: 450px;
-            border: none;
-        }
-        button {
-            margin-top: 10px;
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-    </style>
-</head>
-<body>
-   
-    <head>
-        <meta charset=”UTF-8”>
-        
-        <meta name=”viewport” content=”width=device-width, initial-
-        scale=1.0”>
-        
-        <link rel=”stylesheet” href=”assets/style.css”>
-        <title>Flashcards</title>
-        </head> 
-        #container {
-            display: flex;
-            }
+</html>
